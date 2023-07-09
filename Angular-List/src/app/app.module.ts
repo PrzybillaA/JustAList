@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ListFactoryComponent } from './list-factory/list-factory.component';
+import { ListStaticComponent } from './list-static/list-static.component';
 
 @NgModule({
 	declarations: [
@@ -11,7 +12,8 @@ import { ListFactoryComponent } from './list-factory/list-factory.component';
 	imports: [
 		BrowserModule,
 		HttpClientModule,
-		ListFactoryComponent
+		ListFactoryComponent,
+		ListStaticComponent
 	],
 	providers: [],
 	bootstrap: [AppComponent]

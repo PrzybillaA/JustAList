@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetService } from './core/get.service';
 import { Observable } from 'rxjs';
-import { ListView } from './list-factory/list-view.model';
+import { ListView } from './core/list-view.model';
 
 @Component({
 	selector: 'app-root',

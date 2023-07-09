@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { GetService } from './get.service';
-import { ListView } from '../list-factory/list-view.model';
+import { ListView } from './list-view.model';
 
 describe('GetService', () => {
 	let service: GetService;

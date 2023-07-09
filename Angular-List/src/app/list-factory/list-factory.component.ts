@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListView } from './list-view.model';
+import { ListView } from '../core/list-view.model';
 
 @Component({
 	selector: 'st-list-factory',
@@ -11,8 +11,10 @@ import { ListView } from './list-view.model';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListFactoryComponent {
-	@Input() public set list(value: ListView[]) {
-		this.listIntern = [...value];
+	@Input() public set list(value: ListView[] | undefined | null) {
+		if(value) {
+			this.listIntern = [...value];
+		}
 	}
 
 	public listIntern: ListView[];
@@ -44,7 +46,7 @@ export class ListFactoryComponent {
 		this.sortOrder = {
 			key: key,
 			ascending: currentSort ? !currentSort : true
-		}
+		};
 	}
 
 	private sortString(key: keyof ListView, ascending: boolean): void {
