@@ -9,7 +9,7 @@ import { ListView } from './core/list-view.model';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	title = 'Angular-List';
+	title = "Angular-List";
 
 	public list$: Observable<ListView[]>;
 

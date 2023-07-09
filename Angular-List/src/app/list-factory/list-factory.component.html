@@ -9,7 +9,7 @@
                 [ngClass]="sortOrder?.key != key ? '' : sortOrder.ascending ? 'asc' : 'desc'">
                 {{ key | titlecase }}
                 <span>
-                    {{ sortOrder?.key != key ? '&#9650;' : sortOrder.ascending ? '&#9650;' : '&#9660;' }}
+                    {{ sortOrder?.key != key ? "&#9650;" : sortOrder.ascending ? "&#9650;" : "&#9660;" }}
                 </span>
             </th>
         </thead>

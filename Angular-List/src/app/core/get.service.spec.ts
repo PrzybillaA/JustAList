@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { GetService } from './get.service';
 import { ListView } from './list-view.model';
 
-describe('GetService', () => {
+describe("GetService", () => {
 	let service: GetService;
 	let httpMock: HttpTestingController;
 
@@ -21,15 +21,15 @@ describe('GetService', () => {
 		httpMock.verify();
 	});
 
-	it('should be created', () => {
+	it("should be created", () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should retrieve a list of items from the API', () => {
+	it("should retrieve a list of items from the API", () => {
 		const mockList: ListView[] = [
-			{ id: 1, title: 'Item 1' },
-			{ id: 2, title: 'Item 2' },
-			{ id: 3, title: 'Item 3' }
+			{ id: 1, title: "Item 1", description: "This is number 1" },
+			{ id: 2, title: "Item 2", description: "This is number 2" },
+			{ id: 3, title: "Item 3", description: "Das ist Nummer 3" }
 		];
 
 		service.list$().subscribe((result: ListView[]) => {
@@ -37,7 +37,7 @@ describe('GetService', () => {
 		});
 
 		const req = httpMock.expectOne(service.url);
-		expect(req.request.method).toBe('GET');
+		expect(req.request.method).toBe("GET");
 		req.flush(mockList);
 	});
 });
