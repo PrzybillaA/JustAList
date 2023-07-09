@@ -16,10 +16,9 @@ class App extends React.Component {
 
 			<div className="content">
 				<List></List>
-			</div >
+			</div>
 		</>
 	}
-
 }
 
 export default App;
