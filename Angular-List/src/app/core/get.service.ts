@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ListView } from '../list-factory/list-view.model';
 import { List } from './list.model';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class GetService {
 		private readonly http: HttpClient
 	) { }
 
-	public list$(): Observable<List[]> {
+	public list$(): Observable<ListView[]> {
 		return this.http.get<List[]>(this.url);
 	}
 }

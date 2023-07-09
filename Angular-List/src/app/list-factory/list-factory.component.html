@@ -1,0 +1,21 @@
+<div class="h1">
+    Dynamic List
+</div>
+
+<table class="list-table">
+    <thead>
+        <th *ngFor="let key of getKeys()" (click)="sort(key)" class="pointer"
+            [ngClass]="sortOrder?.key != key ? '' : sortOrder.ascending ? 'asc' : 'desc'">
+            {{ key }}
+            <span>
+                {{ sortOrder?.key != key ? '&#9650;' : sortOrder.ascending ? '&#9650;' : '&#9660;' }}
+            </span>
+        </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listIntern">
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+        </tr>
+    </tbody>
+</table>

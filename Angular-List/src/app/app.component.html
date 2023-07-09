@@ -8,6 +8,5 @@
 </div>
 
 <div class="content">
-	{{ list$ | async }}
-	<router-outlet></router-outlet>
+	<st-list-factory [list]="list$ | async"></st-list-factory>
 </div>

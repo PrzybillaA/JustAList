@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetService } from './core/get.service';
 import { Observable } from 'rxjs';
-import { List } from './core/list.model';
+import { ListView } from './list-factory/list-view.model';
 
 @Component({
 	selector: 'app-root',
@@ -11,7 +11,7 @@ import { List } from './core/list.model';
 export class AppComponent implements OnInit {
 	title = 'Angular-List';
 
-	public list$: Observable<List[]>;
+	public list$: Observable<ListView[]>;
 
 	constructor(
 		private readonly getService: GetService
