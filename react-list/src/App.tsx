@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
+import List from './list/List';
 
 class App extends React.Component {
 	render() {
@@ -15,7 +15,7 @@ class App extends React.Component {
 			</div>
 
 			<div className="content">
-				Content
+				<List></List>
 			</div >
 		</>
 	}
