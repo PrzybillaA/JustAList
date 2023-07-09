@@ -1,19 +1,25 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import './List.scss';
 import { ListView } from './listView';
 import { ListResponse } from './ListResponse';
 
-type ListProps = {
-	list: ListView[]
+interface ListState {
+	error: Error | null;
+	isLoaded: boolean;
+	items: ListView[];
+	idSortDesc: boolean | undefined;
+	titleSortDesc: boolean | undefined;
 }
 
-class List extends Component {
+class List extends Component<{}, ListState> {
 	private readonly url = "https://my-json-server.typicode.com/typicode/demo/posts";
 
-	state = {
-		error: null as Error | null,
+	state: ListState = {
+		error: null,
 		isLoaded: false,
-		items: [] as ListView[]
+		items: [],
+		idSortDesc: undefined,
+		titleSortDesc: undefined
 	};
 
 	componentDidMount() {
@@ -41,29 +47,37 @@ class List extends Component {
 	}
 
 	sortById = (): void => {
-		this.state.items.sort((a, b) => this.idSortDesc
-			? a.id - b.id
-			: b.id - a.id);
-		this.idSortDesc = !this.idSortDesc;
-		this.titleSortDesc = undefined;
+		this.setState(prevState => {
+			const idSortDesc = prevState.idSortDesc === undefined ? true : !prevState.idSortDesc;
+			const titleSortDesc = undefined;
+			const sortedItems = [...prevState.items].sort((a, b) => idSortDesc ? a.id - b.id : b.id - a.id);
+
+			return {
+				items: sortedItems,
+				idSortDesc,
+				titleSortDesc
+			};
+		});
 	};
-	public idSortDesc: boolean | undefined = undefined;
 
 	sortByTitle = (): void => {
-		this.state.items.sort((a, b) => this.titleSortDesc
-			? a.title.localeCompare(b.title)
-			: b.title.localeCompare(a.title));
-		this.titleSortDesc = !this.titleSortDesc;
-		this.idSortDesc = undefined;
-	}
-	public titleSortDesc: boolean | undefined = undefined;
+		this.setState(prevState => {
+			const titleSortDesc = prevState.titleSortDesc === undefined ? true : !prevState.titleSortDesc;
+			const idSortDesc = undefined;
+			const sortedItems = [...prevState.items].sort((a, b) =>
+				titleSortDesc ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title)
+			);
+
+			return {
+				items: sortedItems,
+				idSortDesc,
+				titleSortDesc
+			};
+		});
+	};
 
 	render() {
-		const { error, isLoaded, items } = this.state;
-		const sortById = this.sortById;
-		const idSortDesc = this.idSortDesc;
-		const sortByTitle = this.sortByTitle;
-		const titleSortDesc = this.titleSortDesc;
+		const { error, isLoaded, items, idSortDesc, titleSortDesc } = this.state;
 
 		if (error) {
 			return <div>Error: {error.message}</div>;
@@ -72,24 +86,28 @@ class List extends Component {
 		} else {
 			return (
 				<table className="list-table">
-					<tr>
-						<th onClick={sortById} className={`pointer ${idSortDesc == null ? '' : idSortDesc ? 'desc' : 'asc'}`}>
-							Id <span className="arrow">{idSortDesc ? "▼" : "▲"}</span>
-						</th>
-						<th onClick={sortByTitle} className={`pointer ${titleSortDesc == null ? '' : titleSortDesc ? 'desc' : 'asc'}`}>
-							Title <span className="arrow">{titleSortDesc ? "▼" : "▲"}</span>
-						</th>
-						<th>
-							Description
-						</th>
-					</tr>
-					{items?.map(item => (
-						<tr key={item.id}>
-							<td>{item.id}</td>
-							<td>{item.title}</td>
-							<td>{item.description}</td>
+					<thead>
+						<tr>
+							<th onClick={this.sortById} className={`pointer ${idSortDesc == null ? '' : idSortDesc ? 'desc' : 'asc'}`}>
+								Id <span className="arrow">{idSortDesc ? "▼" : "▲"}</span>
+							</th>
+							<th onClick={this.sortByTitle} className={`pointer ${titleSortDesc == null ? '' : titleSortDesc ? 'desc' : 'asc'}`}>
+								Title <span className="arrow">{titleSortDesc ? "▼" : "▲"}</span>
+							</th>
+							<th>
+								Description
+							</th>
 						</tr>
-					))}
+					</thead>
+					<tbody>
+						{items?.map(item => (
+							<tr key={item.id}>
+								<td>{item.id}</td>
+								<td>{item.title}</td>
+								<td>{item.description}</td>
+							</tr>
+						))}
+					</tbody>
 				</table >
 			);
 		}

@@ -10,7 +10,7 @@ class App extends React.Component {
 					Made by Adrian Przybilla
 				</div>
 				<div className="welcome h1">
-					Welcome to my Angular example
+					Welcome to my React example
 				</div>
 			</div>
 
