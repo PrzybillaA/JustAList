@@ -30,7 +30,7 @@ export class ListFactoryComponent {
 
 	// Can only be called, when the list isn't empty
 	public sort(key: keyof ListView): void {
-		const currentSort = this.sortOrder?.ascending;
+		const currentSort = this.sortOrder?.key === key ? this.sortOrder?.ascending : undefined;
 
 		switch (typeof this.listIntern[0][key]) {
 			case "string":
